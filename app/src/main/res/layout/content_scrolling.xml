@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".activities.MovieActivity"
+    tools:showIn="@layout/activity_movie">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/titleTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Movie title"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/summaryTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Plot Summary"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/releaseYearTV"
+            app:layout_constraintTop_toBottomOf="@+id/durationTV" />
+
+        <TextView
+            android:id="@+id/releaseYearTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2009"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="@+id/titleTV"
+            app:layout_constraintTop_toBottomOf="@+id/titleTV" />
+
+        <TextView
+            android:id="@+id/durationTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="(2h 15m)"
+            app:layout_constraintBaseline_toBaselineOf="@+id/releaseYearTV"
+            app:layout_constraintStart_toEndOf="@+id/releaseYearTV" />
+
+        <TextView
+            android:id="@+id/directorTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Directors"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/summaryTV"
+            app:layout_constraintTop_toBottomOf="@+id/plotTV" />
+
+        <TextView
+            android:id="@+id/actorsTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Actors"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/directorTV"
+            app:layout_constraintTop_toBottomOf="@+id/directorTextTV" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:max="10"
+            style="?android:attr/ratingBarStyleSmall"
+            android:rating="4"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/releaseYearTV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/durationTV"
+            app:layout_constraintTop_toTopOf="@+id/releaseYearTV" />
+
+        <TextView
+            android:id="@+id/ratingTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="(8.2/10)"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+            app:layout_constraintEnd_toStartOf="@+id/ratingBar"
+            app:layout_constraintTop_toTopOf="@+id/ratingBar" />
+
+        <TextView
+            android:id="@+id/plotTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/summaryTV"
+            app:layout_constraintTop_toBottomOf="@+id/summaryTV" />
+
+        <TextView
+            android:id="@+id/directorTextTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="directors bio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/directorTV"
+            app:layout_constraintTop_toBottomOf="@+id/directorTV" />
+
+        <TextView
+            android:id="@+id/actorsTextTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Actors bio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/directorTextTV"
+            app:layout_constraintTop_toBottomOf="@+id/actorsTV" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>
