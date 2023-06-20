@@ -17,37 +17,38 @@
         app:srcCompat="@drawable/imdb_logo" />
 
     <EditText
-        android:id="@+id/usernameEditText"
+        android:id="@+id/usernameET"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_marginTop="64dp"
         android:ems="10"
-        android:hint="Enter Username"
+        android:hint="Username"
         android:drawableLeft="@drawable/ic_person"
+        android:textColorHint="@color/black"
         android:drawablePadding="10dp"
         android:inputType="text"
+        android:textColor="@color/black"
         android:background="@color/white"
-        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/passwordEditText"
+        android:id="@+id/passwordET"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_marginTop="16dp"
+        android:textColorHint="@color/black"
         android:drawableLeft="@drawable/ic_lock"
         android:drawablePadding="10dp"
         android:ems="10"
-        android:hint="Enter Password"
+        android:hint="Password"
         android:inputType="textPassword"
         android:background="@color/white"
-        android:textColorHint="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/usernameEditText"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/usernameEditText"
-        app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/usernameET"
+        app:layout_constraintStart_toStartOf="@+id/usernameET"
+        app:layout_constraintTop_toBottomOf="@+id/usernameET" />
 
     <Button
         android:id="@+id/loginBtn"
@@ -58,10 +59,10 @@
         android:text="Login"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/passwordEditText"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="@+id/passwordEditText"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
+        app:layout_constraintEnd_toEndOf="@+id/passwordET"
+
+        app:layout_constraintStart_toStartOf="@+id/passwordET"
+        app:layout_constraintTop_toBottomOf="@+id/passwordET" />
 
     <Button
         android:id="@+id/registerBtn"

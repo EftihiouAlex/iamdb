@@ -23,9 +23,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     private List<Movie> movies = new ArrayList<>();
     private Context context;
 
-    public MovieAdapter(Context context, List<Movie> movie){
+    private MovieClickListener movieClickListener;
+
+    public MovieAdapter(Context context, List<Movie> movie, MovieClickListener movieClickListener){
         this.movies = movie;
         this.context = context;
+        this.movieClickListener = movieClickListener;
     }
 
 
@@ -62,6 +65,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         Movie movie = movies.get(position);
         holder.textView.setText(movie.getTitle());
         Glide.with(context).load(movie.getImageUrl()).into(holder.imageView);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                movieClickListener.onMovieClick(movie.getId());
+            }
+        });
 
     }
 

@@ -7,17 +7,15 @@ public class FullMovie {
     private List<Director> director;
     private List<Actor> actors;
     private List<Genre> genres;
-    private List<Review> reviews;
 
     public FullMovie() {
     }
 
-    public FullMovie(Movie movie, List<Director> director, List<Actor> actors, List<Genre> genres, List<Review> reviews) {
+    public FullMovie(Movie movie, List<Director> director, List<Actor> actors, List<Genre> genres) {
         this.movie = movie;
         this.director = director;
         this.actors = actors;
         this.genres = genres;
-        this.reviews = reviews;
     }
 
     public Movie getMovie() {
@@ -52,11 +50,4 @@ public class FullMovie {
         this.genres = genres;
     }
 
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
 }
