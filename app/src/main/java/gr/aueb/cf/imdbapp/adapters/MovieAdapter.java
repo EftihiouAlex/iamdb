@@ -13,16 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import gr.aueb.cf.imdbapp.R;
 import gr.aueb.cf.imdbapp.models.Movie;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
-    private ArrayList<Movie> movies = new ArrayList<>();
+    private List<Movie> movies = new ArrayList<>();
     private Context context;
 
-    public MovieAdapter(Context context, ArrayList<Movie> movie){
+    public MovieAdapter(Context context, List<Movie> movie){
         this.movies = movie;
         this.context = context;
     }
