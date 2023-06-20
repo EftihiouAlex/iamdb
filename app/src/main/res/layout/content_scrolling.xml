@@ -33,7 +33,7 @@
             android:text="Plot Summary"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@+id/releaseYearTV"
-            app:layout_constraintTop_toBottomOf="@+id/durationTV" />
+            app:layout_constraintTop_toBottomOf="@+id/genreTV" />
 
         <TextView
             android:id="@+id/releaseYearTV"
@@ -127,6 +127,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/directorTextTV"
             app:layout_constraintTop_toBottomOf="@+id/actorsTV" />
+
+        <TextView
+            android:id="@+id/genreTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Genre"
+            app:layout_constraintStart_toStartOf="@+id/releaseYearTV"
+            app:layout_constraintTop_toBottomOf="@+id/releaseYearTV" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
