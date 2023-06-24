@@ -1,19 +1,18 @@
 package gr.aueb.cf.imdbapp.network;
 
-import gr.aueb.cf.imdbapp.models.FullMovie;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MovieService {
-    private static MovieService instance = null;
+public class ApiService {
+    private static ApiService instance = null;
     private Retrofit retrofit;
     private OkHttpClient client;
 
-    private MovieApi movieApi;
+    private Api api;
 
-    public MovieService() {
+    public ApiService() {
 
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -27,19 +26,19 @@ public class MovieService {
                 .client(client)
                 .build();
 
-        movieApi = retrofit.create(MovieApi.class);
+        api = retrofit.create(Api.class);
     }
 
-    public static MovieService getInstance() {
+    public static ApiService getInstance() {
         if (instance == null) {
-            instance = new MovieService();
+            instance = new ApiService();
         }
 
         return instance;
     }
 
-    public MovieApi getMovieService() {
-        return movieApi;
+    public Api getMovieService() {
+        return api;
     }
 }
 

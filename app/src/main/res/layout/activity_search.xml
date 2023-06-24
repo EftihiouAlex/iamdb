@@ -1,95 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     tools:context=".activities.SearchActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black"
-        tools:context=".activities.SearchActivity">
+    <TextView
+        android:id="@+id/recyclerViewTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="18dp"
+        android:text="Results"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_gravity="left"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="1dp">
-
-            <ImageView
-                android:id="@+id/imdbIV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/imdb_logo" />
-        </LinearLayout>
-
-        <EditText
-            android:id="@+id/searchTV"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@color/white"
-            android:drawableLeft="@drawable/ic_search"
-            android:drawablePadding="20dp"
-            android:ems="10"
-            android:hint="Search here"
-            android:inputType="text"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-            app:layout_constraintHorizontal_bias="0.144"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/latestRV"
-            android:layout_width="0dp"
-            android:layout_height="225dp"
-            android:layout_marginTop="72dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchTV"
-            />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/topRatedRV"
-            android:layout_width="0dp"
-            android:layout_height="229dp"
-            android:layout_marginTop="72dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/latestRV" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="8dp"
-            android:textColor="@color/white"
-            android:text="Latest Releases"
-            app:layout_constraintBottom_toTopOf="@+id/latestRV"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="8dp"
-            android:textColor="@color/white"
-            android:text="Top Rated Movies"
-            app:layout_constraintBottom_toTopOf="@+id/topRatedRV"
-            app:layout_constraintStart_toStartOf="parent" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchRV"
+        android:layout_width="409dp"
+        android:layout_height="615dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewTV" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

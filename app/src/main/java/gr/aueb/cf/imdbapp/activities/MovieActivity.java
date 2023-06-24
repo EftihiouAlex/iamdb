@@ -18,7 +18,7 @@ import gr.aueb.cf.imdbapp.models.Director;
 import gr.aueb.cf.imdbapp.models.FullMovie;
 import gr.aueb.cf.imdbapp.models.Genre;
 import gr.aueb.cf.imdbapp.models.Movie;
-import gr.aueb.cf.imdbapp.network.MovieService;
+import gr.aueb.cf.imdbapp.network.ApiService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,7 +60,7 @@ public class MovieActivity extends AppCompatActivity {
 
         long movieId = (long) getIntent().getExtras().get("movieId");
 
-        MovieService.getInstance().getMovieService().getMovie(movieId).enqueue(new Callback<FullMovie>() {
+        ApiService.getInstance().getMovieService().getMovie(movieId).enqueue(new Callback<FullMovie>() {
             @Override
             public void onResponse(Call<FullMovie> call, Response<FullMovie> response) {
                 Movie movie = response.body().getMovie();
