@@ -21,7 +21,7 @@ public class ApiService {
 
         client = okHttpBuilder.build();
 
-        retrofit = new Retrofit.Builder().baseUrl("http://192.168.2.5:8080/FinalProject_war/api/")
+        retrofit = new Retrofit.Builder().baseUrl("http://192.168.2.6:8080/FinalProject_war/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();

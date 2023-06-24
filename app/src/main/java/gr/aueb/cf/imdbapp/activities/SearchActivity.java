@@ -13,6 +13,7 @@ import java.util.List;
 import gr.aueb.cf.imdbapp.R;
 import gr.aueb.cf.imdbapp.adapters.MovieAdapter;
 import gr.aueb.cf.imdbapp.adapters.MovieClickListener;
+import gr.aueb.cf.imdbapp.adapters.SearchAdapter;
 import gr.aueb.cf.imdbapp.models.Movie;
 import gr.aueb.cf.imdbapp.network.ApiService;
 import retrofit2.Call;
@@ -41,7 +42,7 @@ public class SearchActivity extends AppCompatActivity {
                 } else {
                     RecyclerView recycler =  findViewById(R.id.searchRV);
                     recycler.setLayoutManager(new LinearLayoutManager(SearchActivity.this));
-                    recycler.setAdapter(new MovieAdapter(SearchActivity.this, response.body(), new MovieClickListener() {
+                    recycler.setAdapter(new SearchAdapter(SearchActivity.this, response.body(), new MovieClickListener() {
                         @Override
                         public void onMovieClick(long id) {
                             Intent intent = new Intent(SearchActivity.this, MovieActivity.class);
