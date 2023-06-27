@@ -33,8 +33,9 @@
 
             <ImageView
                 android:id="@+id/movieIV"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="350dp"
+                android:layout_height="350dp"
+                android:layout_gravity="center"
                 />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -42,9 +43,11 @@
 
     <include layout="@layout/content_scrolling" />
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/favoriteBtn"
         android:layout_width="wrap_content"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/fab_margin"
         app:layout_anchor="@id/app_bar"

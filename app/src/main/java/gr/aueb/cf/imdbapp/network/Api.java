@@ -2,6 +2,7 @@ package gr.aueb.cf.imdbapp.network;
 
 import java.util.List;
 
+import gr.aueb.cf.imdbapp.models.FavoriteMovie;
 import gr.aueb.cf.imdbapp.models.FullMovie;
 import gr.aueb.cf.imdbapp.models.Movie;
 import gr.aueb.cf.imdbapp.models.User;
@@ -31,5 +32,11 @@ public interface Api {
 
     @POST("movies/addfavorites")
     Call<List<Movie>> addFavorite(@Query("movieId") long movieId);
+
+    @GET("movies/favorites")
+    Call<List<Movie>> getFavorites(@Query("userId") long userId);
+
+    @GET
+    Call<FavoriteMovie> getFavorite(@Query("userId")long userId, @Query("movieId") long movieId );
 
 }

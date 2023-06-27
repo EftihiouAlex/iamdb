@@ -1,17 +1,16 @@
 package gr.aueb.cf.imdbapp.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
 
 import gr.aueb.cf.imdbapp.R;
-import gr.aueb.cf.imdbapp.adapters.MovieAdapter;
 import gr.aueb.cf.imdbapp.adapters.MovieClickListener;
 import gr.aueb.cf.imdbapp.adapters.SearchAdapter;
 import gr.aueb.cf.imdbapp.models.Movie;
@@ -40,7 +39,7 @@ public class SearchActivity extends AppCompatActivity {
                 if (movies.isEmpty()) {
                     Toast.makeText(SearchActivity.this, "No movies found", Toast.LENGTH_SHORT).show();
                 } else {
-                    RecyclerView recycler =  findViewById(R.id.searchRV);
+                    RecyclerView recycler = findViewById(R.id.searchRV);
                     recycler.setLayoutManager(new LinearLayoutManager(SearchActivity.this));
                     recycler.setAdapter(new SearchAdapter(SearchActivity.this, response.body(), new MovieClickListener() {
                         @Override
@@ -55,7 +54,7 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Movie>> call, Throwable t) {
-
+                Toast.makeText(SearchActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         });
     }

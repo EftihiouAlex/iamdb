@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import gr.aueb.cf.imdbapp.Parameters;
 import gr.aueb.cf.imdbapp.R;
 import gr.aueb.cf.imdbapp.adapters.MovieAdapter;
 import gr.aueb.cf.imdbapp.adapters.MovieClickListener;
 import gr.aueb.cf.imdbapp.models.Movie;
+import gr.aueb.cf.imdbapp.models.User;
 import gr.aueb.cf.imdbapp.network.ApiService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,8 +32,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        searchView = findViewById(R.id.searchTV);
+        Intent intent = getIntent();
+        long userId = intent.getLongExtra("userId", -1);
+        String username = intent.getStringExtra("username");
+        String password = intent.getStringExtra("password");
 
+
+        searchView = findViewById(R.id.searchTV);
         ApiService.getInstance().getMovieService().getLatest().enqueue(new Callback<List<Movie>>() {
             @Override
             public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
@@ -74,14 +81,40 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        long userId = Parameters.getInstance().user.getId();
+        ApiService.getInstance().getMovieService().getFavorites(userId).enqueue(new Callback<List<Movie>>() {
+            @Override
+            public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
+                RecyclerView favoritesRV = findViewById(R.id.favoritesRV);
+                favoritesRV.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                favoritesRV.setAdapter(new MovieAdapter(MainActivity.this, response.body(), new MovieClickListener() {
+                    @Override
+                    public void onMovieClick(long id) {
+                        Intent intent = new Intent(MainActivity.this, MovieActivity.class);
+                        intent.putExtra("movieId", id);
+                        startActivity(intent);
+                    }
+                }));
+            }
+
+            @Override
+            public void onFailure(Call<List<Movie>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
         findViewById(R.id.searchBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String query = searchView.getText().toString();
-                if (isSearchValid(query)) {
-                    Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-                    intent.putExtra("title", query);
-                    startActivity(intent);
+                if (query.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Please insert a movie title", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (isSearchValid(query)) {
+                        Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                        intent.putExtra("title", query);
+                        startActivity(intent);
+                    }
                 }
             }
         });
@@ -89,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Boolean isSearchValid(String search) {
-        Boolean result =  false;
+        Boolean result = false;
         if (search == "") {
             Toast.makeText(this, "Please write something!", Toast.LENGTH_SHORT).show();
         } else {

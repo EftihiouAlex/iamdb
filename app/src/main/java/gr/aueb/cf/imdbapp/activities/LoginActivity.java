@@ -20,7 +20,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameET;
     private EditText passwordET;
-    private EditText emailET;
     private Button lgnBtn;
     private Button registerBtn;
 
@@ -46,7 +45,11 @@ public class LoginActivity extends AppCompatActivity {
                         User user = response.body();
 
                         if (user != null) {
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.putExtra("userId", user.getId());
+                            intent.putExtra("username", username);
+                            intent.putExtra("password", password);
+                            startActivity(intent);
                             finish();
                             Toast.makeText(LoginActivity.this, "Welcome " + user.getUsername(), Toast.LENGTH_SHORT).show();
                         } else {

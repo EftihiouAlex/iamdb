@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,8 +47,13 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = passwordET.getText().toString();
                 String confirmPassword = confirmPasswordET.getText().toString();
 
-                if (isUserValid(password, confirmPassword)) {
-                    ApiService.getInstance().getMovieService().registerUser(username, password  , email).enqueue(new Callback<User>() {
+
+                if(!isEmailValid(email)){
+                    Toast.makeText(RegisterActivity.this, "Invalid email format.", Toast.LENGTH_SHORT).show();
+                }else if (!isUserValid(password, confirmPassword)) {
+                    Toast.makeText(RegisterActivity.this, "Passwords do not match.", Toast.LENGTH_SHORT).show();
+                }else{
+                    ApiService.getInstance().getMovieService().registerUser(username, password, email).enqueue(new Callback<User>() {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
                             User user = response.body();
@@ -69,17 +75,16 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private Boolean isUserValid(String password, String confirmPassword) {
-        Boolean isValid = false;
-        if (Objects.equals(password, confirmPassword)) {
-            isValid = true;
-        } else {
-            Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
-        }
-        return isValid;
+    private boolean isUserValid(String password, String confirmPassword) {
+        return password.equals(confirmPassword);
     }
 
-    private void registerRequest(String email, String username, String password) {
-
+    private boolean usernameAlreadyExists(String username, String existingUsername){
+        return !username.equals(existingUsername);
     }
+
+    private boolean isEmailValid(String email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
 }
