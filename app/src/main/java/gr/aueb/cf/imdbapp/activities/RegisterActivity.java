@@ -48,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String confirmPassword = confirmPasswordET.getText().toString();
 
 
+                //pws mporw na deixnw oti to username i to email iparxoun
                 if(!isEmailValid(email)){
                     Toast.makeText(RegisterActivity.this, "Invalid email format.", Toast.LENGTH_SHORT).show();
                 }else if (!isUserValid(password, confirmPassword)) {
@@ -79,12 +80,11 @@ public class RegisterActivity extends AppCompatActivity {
         return password.equals(confirmPassword);
     }
 
-    private boolean usernameAlreadyExists(String username, String existingUsername){
-        return !username.equals(existingUsername);
-    }
-
     private boolean isEmailValid(String email) {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
+
+
+
 
 }

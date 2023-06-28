@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import gr.aueb.cf.imdbapp.Parameters;
 import gr.aueb.cf.imdbapp.R;
 import gr.aueb.cf.imdbapp.models.User;
 import gr.aueb.cf.imdbapp.network.ApiService;
@@ -49,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                             intent.putExtra("userId", user.getId());
                             intent.putExtra("username", username);
                             intent.putExtra("password", password);
+                            Parameters.getInstance().user = user;
                             startActivity(intent);
                             finish();
                             Toast.makeText(LoginActivity.this, "Welcome " + user.getUsername(), Toast.LENGTH_SHORT).show();

@@ -31,12 +31,12 @@ public interface Api {
     Call<List<Movie>> searchMovie(@Query("title") String title);
 
     @POST("movies/addfavorites")
-    Call<List<Movie>> addFavorite(@Query("movieId") long movieId);
+    Call<List<Movie>> addFavorite(@Query("movieId") long movieId, @Query("userId")  long userId);
 
     @GET("movies/favorites")
     Call<List<Movie>> getFavorites(@Query("userId") long userId);
 
-    @GET
+    @GET("movies/getfavorite")
     Call<FavoriteMovie> getFavorite(@Query("userId")long userId, @Query("movieId") long movieId );
 
 }

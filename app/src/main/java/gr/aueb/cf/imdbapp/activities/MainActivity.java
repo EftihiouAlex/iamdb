@@ -32,11 +32,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = getIntent();
-        long userId = intent.getLongExtra("userId", -1);
-        String username = intent.getStringExtra("username");
-        String password = intent.getStringExtra("password");
-
 
         searchView = findViewById(R.id.searchTV);
         ApiService.getInstance().getMovieService().getLatest().enqueue(new Callback<List<Movie>>() {
@@ -81,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        long userId = Parameters.getInstance().user.getId();
+        long userId = Parameters.getInstance().user.getId();
         ApiService.getInstance().getMovieService().getFavorites(userId).enqueue(new Callback<List<Movie>>() {
             @Override
             public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {

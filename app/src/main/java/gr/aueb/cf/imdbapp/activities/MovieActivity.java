@@ -17,6 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import gr.aueb.cf.imdbapp.Parameters;
 import gr.aueb.cf.imdbapp.R;
 import gr.aueb.cf.imdbapp.models.Actor;
 import gr.aueb.cf.imdbapp.models.Director;
@@ -64,9 +65,7 @@ public class MovieActivity extends AppCompatActivity {
         actorsTextTv = findViewById(R.id.actorsTextTV);
         favoriteBtn = findViewById(R.id.favoriteBtn);
 
-        long movieId = (long) getIntent().getExtras().get("movieId");
-        long userId = (long) getIntent().getExtras().get("userId");
-
+        long movieId = getIntent().getLongExtra("movieId", -1);
         ApiService.getInstance().getMovieService().getMovie(movieId).enqueue(new Callback<FullMovie>() {
             @Override
             public void onResponse(Call<FullMovie> call, Response<FullMovie> response) {
@@ -117,19 +116,23 @@ public class MovieActivity extends AppCompatActivity {
             }
         });
 
+        long userId = Parameters.getInstance().user.getId();
         ApiService.getInstance().getMovieService().getFavorite(userId, movieId).enqueue(new Callback<FavoriteMovie>() {
             @Override
             public void onResponse(Call<FavoriteMovie> call, Response<FavoriteMovie> response) {
-                FavoriteMovie  favoriteMovie = response.body();
-                if(favoriteMovie == null){
+                FavoriteMovie favoriteMovie = response.body();
+                if (favoriteMovie.getUserId() == -1L) {
                     favoriteBtn.setImageDrawable(ResourcesCompat.getDrawable(MovieActivity.this.getResources(), R.drawable.ic_favorite_empty, MovieActivity.this.getTheme()));
                     favoriteBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            addToFavorite(userId);
+                            addToFavorite(movieId, userId);
+                            favoriteBtn.setImageDrawable(ResourcesCompat.getDrawable(MovieActivity.this.getResources(), R.drawable.ic_favorite, MovieActivity.this.getTheme()));
+                            favoriteBtn.setOnClickListener(null);
+                            Toast.makeText(MovieActivity.this, "Movie inserted into favorites", Toast.LENGTH_SHORT).show();
                         }
                     });
-                }else{
+                } else {
                     favoriteBtn.setImageDrawable(ResourcesCompat.getDrawable(MovieActivity.this.getResources(), R.drawable.ic_favorite, MovieActivity.this.getTheme()));
                 }
                 favoriteBtn.setVisibility(View.VISIBLE);
@@ -137,17 +140,19 @@ public class MovieActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<FavoriteMovie> call, Throwable t) {
-
+                t.printStackTrace();
             }
         });
 
+
     }
 
-    private void addToFavorite(long userId){
-        ApiService.getInstance().getMovieService().addFavorite(userId).enqueue(new Callback<List<Movie>>() {
+    //check
+    private void addToFavorite(long movieId, long userId){
+        ApiService.getInstance().getMovieService().addFavorite(movieId, userId).enqueue(new Callback<List<Movie>>() {
             @Override
             public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
-                Toast.makeText(MovieActivity.this, "Movie inserted into favorites", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
