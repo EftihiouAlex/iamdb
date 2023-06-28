@@ -48,7 +48,6 @@ public class RegisterActivity extends AppCompatActivity {
                 String confirmPassword = confirmPasswordET.getText().toString();
 
 
-                //pws mporw na deixnw oti to username i to email iparxoun
                 if(!isEmailValid(email)){
                     Toast.makeText(RegisterActivity.this, "Invalid email format.", Toast.LENGTH_SHORT).show();
                 }else if (!isUserValid(password, confirmPassword)) {
@@ -58,17 +57,28 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
                             User user = response.body();
-                            if (user == null) {
-                                Toast.makeText(RegisterActivity.this, "Register failed. Try again..!", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(RegisterActivity.this, "Register success. Please login!", Toast.LENGTH_SHORT).show();
-                                finish();
+                            if(response.code() >= 500){
+                                System.out.println(response);
+                                try{
+                                    Toast.makeText(RegisterActivity.this, response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                                }catch(Exception e){
+                                    e.printStackTrace();
+                                }
+
+                            }else if(response.code() >= 200){
+                                if (user == null) {
+                                    Toast.makeText(RegisterActivity.this, "Register failed. Try again..!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(RegisterActivity.this, "Register success. Please login!", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
                             }
+
                         }
 
                         @Override
                         public void onFailure(Call<User> call, Throwable t) {
-                            Toast.makeText(RegisterActivity.this, "Network error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
