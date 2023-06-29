@@ -85,24 +85,41 @@ public class MovieActivity extends AppCompatActivity {
                 plotTV.setText(movie.getPlotSummary());
 
                 StringBuilder actorsBuilder = new StringBuilder();
+                boolean hasNextActor = true;
                 for (Actor actor : actors) {
-                    actorsBuilder.append(actor.getFirstname() + " " + actor.getLastname()).append(", ");
-
+                    if (!hasNextActor) {
+                        actorsBuilder.append(", ");
+                    } else {
+                        hasNextActor = false;
+                    }
+                    actorsBuilder.append(actor.getFirstname()).append(" ").append(actor.getLastname());
                 }
+
                 String actorsText = actorsBuilder.toString();
                 actorsTextTv.setText(actorsText);
 
                 StringBuilder directorsBuilder = new StringBuilder();
+                boolean hasNextDirector = true;
                 for (Director director : directors) {
-                    directorsBuilder.append(director.getFirstname() + " " + director.getLastname()).append(", ");
-
+                    if (!hasNextDirector) {
+                        directorsBuilder.append(", ");
+                    }else{
+                        hasNextDirector = false;
+                    }
+                    directorsBuilder.append(director.getFirstname()).append(" ").append(director.getLastname());
                 }
                 String directorsText = directorsBuilder.toString();
                 directorTextTV.setText(directorsText);
 
                 StringBuilder genresBuilder = new StringBuilder();
+                boolean hasNextGenre = true;
                 for(Genre genre : genres){
-                    genresBuilder.append(genre.getType()).append(", ");
+                    if(!hasNextGenre){
+                        genresBuilder.append(", ");
+                    }else{
+                        hasNextGenre = false;
+                    }
+                    genresBuilder.append(genre.getType());
                 }
                 String genresText = genresBuilder.toString();
                 genreTV.setText(genresText);
